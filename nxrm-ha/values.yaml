@@ -35,6 +35,7 @@ aws:
     clusterName: nxrm-nexus
 statefulset:
   serviceName: nxrm-statefulset-service
+  podSecurityContext: {} # Add pod level security context
   replicaCount: 3
   clustered: true
   additionalVolumes:
@@ -135,6 +136,11 @@ statefulset:
     image:
       repository: busybox
       tag: 1.33.1
+    securityContext: {}
+   #   allowPrivilegeEscalation: false
+   #   capabilities:
+   #     drop:
+   #       - ALL
     resources:
       limits:
         cpu: "0.2"
@@ -142,10 +148,30 @@ statefulset:
       requests:
         cpu: "0.1"
         memory: "256Mi"
+    livenessProbe: {}
+    #  exec:
+    #    command:
+    #      - "sh"
+    #      - "-c"
+    #      - "pgrep tail"
+    #  initialDelaySeconds: 20
+    #  periodSeconds: 15
+    #  failureThreshold: 3
+    readinessProbe: {}
+    #  exec:
+    #    command:
+    #      - "sh"
+    #      - "-c"
+    #      - "pgrep tail"
   auditLogContainer:
     image:
       repository: busybox
       tag: 1.33.1
+    securityContext: {}
+   #   allowPrivilegeEscalation: false
+   #   capabilities:
+   #     drop:
+   #       - ALL
     resources:
       limits:
         cpu: "0.2"
@@ -153,10 +179,30 @@ statefulset:
       requests:
         cpu: "0.1"
         memory: "256Mi"
+    livenessProbe: {}
+    #  exec:
+    #    command:
+    #      - "sh"
+    #      - "-c"
+    #      - "pgrep tail"
+    #  initialDelaySeconds: 20
+    #  periodSeconds: 15
+    #  failureThreshold: 3
+    readinessProbe: {}
+    #  exec:
+    #    command:
+    #      - "sh"
+    #      - "-c"
+    #      - "pgrep tail"
   taskLogContainer:
     image:
       repository: busybox
       tag: 1.33.1
+    securityContext: {}
+   #   allowPrivilegeEscalation: false
+   #   capabilities:
+   #     drop:
+   #       - ALL
     resources:
       limits:
         cpu: "0.2"
@@ -164,6 +210,21 @@ statefulset:
       requests:
         cpu: "0.1"
         memory: "256Mi"
+    livenessProbe: {}
+    #  exec:
+    #    command:
+    #      - "sh"
+    #      - "-c"
+    #      - "pgrep tail"
+    #  initialDelaySeconds: 20
+    #  periodSeconds: 15
+    #  failureThreshold: 3
+    readinessProbe: {}
+    #  exec:
+    #    command:
+    #      - "sh"
+    #      - "-c"
+    #      - "pgrep tail"
   startupProbe: # Allow up to 30 minutes for the container to finish any pending DB migration. Once the startup probe succeeds the liveness- and readiness probes get activated (no need for initialDelaySeconds).
     initialDelaySeconds: 0
     periodSeconds: 10
